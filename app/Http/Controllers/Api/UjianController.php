@@ -8,8 +8,6 @@ use App\Models\Soal;
 use App\Models\Ujian;
 use App\Models\UjianSoalList;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
-use Termwind\Components\Raw;
 
 class UjianController extends Controller
 {
