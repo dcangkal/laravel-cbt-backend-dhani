@@ -17,6 +17,12 @@ return new class extends Migration
             $table->integer('nilai_angka')->nullable();
             $table->integer('nilai_verbal')->nullable();
             $table->integer('nilai_logika')->nullable();
+            $table->enum('status_angka', ['start', 'done'])->default('start');
+            $table->enum('status_verbal', ['start', 'done'])->default('start');
+            $table->enum('status_logika', ['start', 'done'])->default('start');
+            $table->integer('timer_angka')->nullable();
+            $table->integer('timer_verbal')->nullable();
+            $table->integer('timer_logika')->nullable();
             $table->string('hasil')->nullable();
             $table->timestamps();
         });

@@ -4,7 +4,6 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\MateriController;
 use App\Http\Controllers\Api\UjianController;
-use App\Models\Materi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +45,6 @@ Route::apiResource('contents', ContentController::class)->middleware('auth:sanct
 
 //get materis
 Route::apiResource('materis', MateriController::class)->middleware('auth:sanctum');
+
+//get nilai
+Route::get('/get-nilai', [UjianController::class, 'hitungNilaiUjianByKategori'])->middleware('auth:sanctum');
