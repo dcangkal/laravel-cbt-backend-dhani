@@ -8,6 +8,7 @@ use App\Models\Soal;
 use App\Models\Ujian;
 use App\Models\UjianSoalList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UjianController extends Controller
 {
@@ -167,6 +168,7 @@ class UjianController extends Controller
         });
 
         $totalBenar = $ujianSoalList->where('kebenaran', true)->count();
+        $totalSalah = $ujianSoalList->where('kebenaran', false)->count();
         $totalSoal = $ujianSoalList->count();
         $nilai = ($totalBenar / $totalSoal) * 100;
 
@@ -183,17 +185,32 @@ class UjianController extends Controller
             $timer_field = 'timer_logika';
         }
 
-        //update nilai, status, timer
+        // update field hasil
+        // rumus = (nilai_angka + nilai_verbal + nilai_logika) / 3
+        // jika hasil >=70 maka Lulus else Tidak Lulus
+
+        $rumus = ($ujian->nilai_angka + $ujian->nilai_verbal + $ujian->nilai_logika) / 3;
+        $hasil_field = 'hasil';
+        if ($rumus > 70) {
+            $hasil = 'Lulus';
+        } else {
+            $hasil = 'Tidak Lulus';
+        }
+
         $ujian->update([
             $kategori_field => $nilai,
             $status_field => 'done',
             $timer_field => 0,
-
+            $hasil_field => $hasil,
         ]);
 
         return response()->json([
-            'message' => 'Berhasil mendapatkan niai',
+            'message' => 'Berhasil mendapatkan nilai',
             'nilai' => $nilai,
+            'hasil' => $hasil,
+            'benar' => $totalBenar,
+            'salah' => $totalSalah,
+            'soal' => $totalSoal,
         ]);
     }
 }
