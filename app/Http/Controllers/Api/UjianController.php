@@ -104,9 +104,9 @@ class UjianController extends Controller
 
         $timer = $ujian->timer_angka;
         if ($request->kategori == 'Verbal') {
-            $ujian->timer_verbal;
+            $timer = $ujian->timer_verbal;
         } else if ($request->kategori == 'Logika') {
-            $ujian->timer_logika;
+            $timer = $ujian->timer_logika;
         }
 
         return response()->json([
