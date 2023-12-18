@@ -211,6 +211,7 @@ class UjianController extends Controller
             'benar' => $totalBenar,
             'salah' => $totalSalah,
             'soal' => $totalSoal,
+            'kategori' => $kategori,
         ]);
     }
 }
