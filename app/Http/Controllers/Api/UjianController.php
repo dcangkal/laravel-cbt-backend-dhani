@@ -60,6 +60,9 @@ class UjianController extends Controller
 
         $ujian = Ujian::create([
             'user_id' => $request->user()->id,
+            'timer_angka' => 10,
+            'timer_verbal' => 10,
+            'timer_logika' => 10,
         ]);
 
         foreach ($soalAngka as $soal) {
