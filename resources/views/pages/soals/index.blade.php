@@ -41,12 +41,24 @@
                             </div>
                             <div class="card-body">
                                 <div class="float-left">
-                                    <select class="form-control selectric">
+                                    {{-- <select class="form-control selectric">
                                         <option>Action For Selected</option>
                                         <option>Move to Draft</option>
                                         <option>Move to Pending</option>
                                         <option>Delete Pemanently</option>
-                                    </select>
+                                    </select> --}}
+                                    <form action="{{ route('import') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="input-group">
+                                            <input type="file" class="form-control" name="file">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="submit"><i
+                                                        class="far fa-file-alt"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
                                 </div>
                                 <div class="float-right">
                                     <form method="GET" action="{{ route('soal.index') }}">
@@ -67,6 +79,7 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Pertanyaan</th>
+                                            <th>Kategori</th>
                                             <th>jawaban A</th>
                                             <th>jawaban B</th>
                                             <th>jawaban C</th>
@@ -78,6 +91,7 @@
                                             <tr>
                                                 <td>{{ $soal->id }}</td>
                                                 <td>{{ $soal->pertanyaan }}</td>
+                                                <td>{{ $soal->kategori }}</td>
                                                 <td>{{ $soal->jawaban_a }}</td>
                                                 <td>{{ $soal->jawaban_b }}</td>
                                                 <td>{{ $soal->jawaban_c }}</td>

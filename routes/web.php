@@ -28,7 +28,13 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
     Route::resource('user', UserController::class);
     Route::resource('soal', SoalController::class);
+    // Route::post('/import', SoalController::class, 'import')->name('import');
 });
+
+Route::middleware(['auth'])->post('/import', [SoalController::class, 'import'])->name('import');
+
+// Route::post('import', 'SoalController@import')->middleware('auth');
+
 
 // Route::get('/login', function () {
 //     return view('pages.auth.login');
